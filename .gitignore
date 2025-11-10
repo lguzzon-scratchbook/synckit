@@ -1,0 +1,66 @@
+# Rust
+target/
+# Ignore Cargo.lock for libraries, but track it for binary/server projects
+Cargo.lock
+# Exception: Track lock files for server applications
+!server/*/Cargo.lock
+*.rs.bk
+*.pdb
+
+# WASM
+pkg/
+wasm-pack.log
+
+# Node/TypeScript
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Exception: Track lock files for applications (reproducible builds)
+# !server/*/package-lock.json
+# !server/*/bun.lockb
+# Uncomment above when lock files exist
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDEs (shared configs can be tracked)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build artifacts
+*.wasm
+*.js.map
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Local development
+.scratch/
+notes.txt
+
+# Database files (if testing locally)
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated documentation (if using auto-doc generators)
+# Uncomment if you use tools like rustdoc or typedoc to generate docs locally
+# docs/generated/
