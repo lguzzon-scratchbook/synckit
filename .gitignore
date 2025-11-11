@@ -72,3 +72,11 @@ protocol/tla/*.fp
 protocol/tla/*TTrace*.tla
 protocol/tla/*TTrace*.bin
 protocol/tla/tla2tools.jar
+
+# Internal development files (not for contributors)
+STATUS_REPORT.md
+VERIFICATION_REPORT.md
+NEXT_STEPS.md
+DIRECTORY_TREE.txt
+*_INTERNAL.md
+.notes/
