@@ -8,9 +8,11 @@
 
 pub mod vector_clock;
 pub mod lww;
+pub mod delta;
 
 pub use vector_clock::VectorClock;
 pub use lww::LWWField;
+pub use delta::{Delta, compute_delta, apply_delta, merge_deltas};
 
 use crate::ClientID;
 use serde::{Deserialize, Serialize};

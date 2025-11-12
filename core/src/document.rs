@@ -31,7 +31,7 @@ pub struct Document {
 }
 
 /// A single field with LWW metadata
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Field {
     /// Field value (JSON-like)
     pub value: JsonValue,
