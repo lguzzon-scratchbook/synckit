@@ -1,0 +1,6 @@
+fix: Remove internal planning file and update Phase 6 in roadmap
+
+- Remove sdk/PHASE6_PLAN.md from git (internal dev file)
+- Add *_PLAN.md pattern to .gitignore
+- Update ROADMAP.md with complete Phase 6 implementation details
+- Document actual deliverables, files created, and API surface
