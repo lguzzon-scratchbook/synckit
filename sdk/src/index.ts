@@ -1,35 +1,74 @@
 /**
- * @synckit/sdk - TypeScript SDK for SyncKit
+ * SyncKit SDK
+ * Production-grade local-first sync engine
  * 
- * ⚠️ PLACEHOLDER - Full implementation in Phase 6 (Days 19-23)
- * 
- * This file is a placeholder to establish the package structure.
- * The actual SDK will be implemented after:
- * - Phase 3: CRDT Foundation
- * - Phase 4: Protocol & Serialization  
- * - Phase 5: WASM Compilation & FFI
- * 
- * @package @synckit/sdk
- * @version 0.0.0-alpha
- * @phase 6
+ * @packageDocumentation
+ * @module @synckit/sdk
  */
 
-// Placeholder export to satisfy TypeScript
-export const SYNCKIT_SDK_PHASE = 6;
-export const SYNCKIT_SDK_STATUS = 'planned';
+// Core exports
+export { SyncKit } from './synckit'
+export { SyncDocument } from './document'
+
+// Storage adapters
+export { MemoryStorage, IndexedDBStorage, createStorage } from './storage'
+export type { StorageAdapter, StoredDocument } from './storage'
+
+// Types
+export type {
+  SyncKitConfig,
+  DocumentData,
+  FieldPath,
+  SubscriptionCallback,
+  Unsubscribe,
+  QueuedOperation,
+  QueueConfig
+} from './types'
+
+// Errors
+export {
+  SyncKitError,
+  StorageError,
+  WASMError,
+  DocumentError
+} from './types'
+
+// Version
+export const VERSION = '0.1.0-alpha.1'
 
 /**
- * This will be the main SDK entry point in Phase 6
+ * Quick start example:
  * 
- * @example
  * ```typescript
  * import { SyncKit } from '@synckit/sdk'
  * 
- * const sync = new SyncKit({ url: 'ws://localhost:8080' })
- * const doc = sync.document<Todo>('todo-123')
- * await doc.update({ completed: true })
+ * // Initialize SyncKit
+ * const sync = new SyncKit({
+ *   storage: 'indexeddb',
+ *   name: 'my-app'
+ * })
+ * 
+ * await sync.init()
+ * 
+ * // Create a typed document
+ * interface Todo {
+ *   title: string
+ *   completed: boolean
+ * }
+ * 
+ * const doc = sync.document<Todo>('todo-1')
+ * 
+ * // Set fields
+ * await doc.set('title', 'Buy milk')
+ * await doc.set('completed', false)
+ * 
+ * // Subscribe to changes
+ * doc.subscribe((todo) => {
+ *   console.log('Todo updated:', todo)
+ * })
+ * 
+ * // Get current state
+ * const todo = doc.get()
+ * console.log(todo.title) // "Buy milk"
  * ```
  */
-export type SyncKit = {
-  // To be implemented in Phase 6
-};
