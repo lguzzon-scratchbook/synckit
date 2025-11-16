@@ -4,7 +4,7 @@ import { verifyToken, type TokenPayload } from './jwt';
 /**
  * Auth middleware - validates JWT token from Authorization header
  */
-export async function authMiddleware(c: Context, next: Next) {
+export async function authMiddleware(c: Context, next: Next): Promise<Response | void> {
   const authHeader = c.req.header('Authorization');
   
   if (!authHeader) {
@@ -61,7 +61,7 @@ export function getUser(c: Context): TokenPayload | undefined {
 /**
  * Require admin middleware
  */
-export async function requireAdmin(c: Context, next: Next) {
+export async function requireAdmin(c: Context, next: Next): Promise<Response | void> {
   const user = getUser(c);
   
   if (!user) {

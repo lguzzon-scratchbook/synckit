@@ -7,6 +7,7 @@ import {
   parseMessage, 
   createMessageId 
 } from './protocol';
+import type { TokenPayload } from '../auth/jwt';
 
 /**
  * Connection state enum
@@ -33,10 +34,10 @@ export class Connection {
   public state: ConnectionState;
   public userId?: string;
   public clientId?: string;
+  public tokenPayload?: TokenPayload; // Store full token payload for permissions
   
   private ws: WebSocket;
   private heartbeatInterval?: Timer;
-  private lastPingTime?: number;
   private isAlive: boolean = true;
 
   constructor(ws: WebSocket, connectionId: string) {
@@ -127,7 +128,7 @@ export class Connection {
   /**
    * Send pong response
    */
-  private sendPong(pingId: string) {
+  private sendPong(_pingId: string) {
     const pong: PongMessage = {
       type: MessageType.PONG,
       id: createMessageId(),

@@ -27,7 +27,7 @@ export interface DocumentPermissions {
 export function generateAccessToken(payload: Omit<TokenPayload, 'iat' | 'exp'>): string {
   return jwt.sign(payload, config.jwtSecret, {
     expiresIn: config.jwtExpiresIn,
-  });
+  }) as string;
 }
 
 /**
@@ -36,7 +36,7 @@ export function generateAccessToken(payload: Omit<TokenPayload, 'iat' | 'exp'>):
 export function generateRefreshToken(userId: string): string {
   return jwt.sign({ userId }, config.jwtSecret, {
     expiresIn: config.jwtRefreshExpiresIn,
-  });
+  }) as string;
 }
 
 /**

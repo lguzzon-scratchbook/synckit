@@ -5,12 +5,17 @@ import { cors } from 'hono/cors';
 import { config } from './config';
 import { SyncWebSocketServer } from './websocket/server';
 import { auth } from './routes/auth';
+import { PostgresAdapter } from './storage/postgres';
+import { RedisPubSub } from './storage/redis';
 
 /**
  * SyncKit TypeScript Reference Server
  * 
  * Production-ready WebSocket server for real-time synchronization
  */
+
+// Async initialization wrapper
+async function startServer() {
 
 const app = new Hono();
 
@@ -26,14 +31,15 @@ app.route('/auth', auth);
 
 // Health check endpoint
 app.get('/health', (c) => {
-  const wsMetrics = wsServer?.getMetrics() || { totalConnections: 0, totalUsers: 0, totalClients: 0 };
+  const stats = wsServer?.getStats();
   
   return c.json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
     version: '0.1.0',
     uptime: process.uptime(),
-    connections: wsMetrics,
+    connections: stats?.connections || { totalConnections: 0, totalUsers: 0, totalClients: 0 },
+    documents: stats?.documents || { totalDocuments: 0, documents: [] },
   });
 });
 
@@ -47,10 +53,74 @@ app.get('/', (c) => {
       health: '/health',
       ws: '/ws',
       auth: '/auth',
-      sync: '/sync (coming in Sub-Phase 7.4)',
+    },
+    features: {
+      websocket: 'Real-time sync via WebSocket',
+      auth: 'JWT authentication',
+      sync: 'Delta-based document synchronization',
+      crdt: 'LWW conflict resolution',
     },
   });
 });
+
+// =============================================================================
+// INITIALIZE STORAGE LAYER
+// =============================================================================
+
+// Initialize PostgreSQL
+const storage = new PostgresAdapter({
+  connectionString: config.databaseUrl,
+  poolMin: config.databasePoolMin,
+  poolMax: config.databasePoolMax,
+  connectionTimeout: 5000,
+});
+
+// Initialize Redis pub/sub
+const pubsub = new RedisPubSub(
+  config.redisUrl,
+  config.redisChannelPrefix
+);
+
+// Connect to storage
+let storageConnected = false;
+let redisConnected = false;
+
+try {
+  console.log('🔌 Connecting to PostgreSQL...');
+  await storage.connect();
+  storageConnected = true;
+  console.log('✅ PostgreSQL connected');
+} catch (error) {
+  console.warn('⚠️  PostgreSQL connection failed (this is OK for development)');
+  console.warn('   Server will run in memory-only mode');
+  console.warn(`   Reason: ${error instanceof Error ? error.message : String(error)}`);
+  console.warn('   To enable persistence: Setup PostgreSQL and run "bun run db:migrate"');
+}
+
+try {
+  console.log('🔌 Connecting to Redis...');
+  // Add timeout for Redis connection
+  const redisTimeout = new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Redis connection timeout')), 3000)
+  );
+  await Promise.race([pubsub.connect(), redisTimeout]);
+  redisConnected = true;
+  console.log('✅ Redis connected');
+} catch (error) {
+  console.warn('⚠️  Redis connection failed (this is OK for single-server mode)');
+  console.warn('   Server will continue without Redis pub/sub');
+  console.warn(`   Reason: ${error instanceof Error ? error.message : String(error)}`);
+  // Disconnect to clean up any partial connections
+  try {
+    await pubsub.disconnect();
+  } catch (e) {
+    // Ignore disconnect errors
+  }
+}
+
+// =============================================================================
+// START HTTP SERVER
+// =============================================================================
 
 // Create HTTP server with WebSocket upgrade
 const server = serve({
@@ -59,8 +129,15 @@ const server = serve({
   hostname: config.host,
 });
 
-// Initialize WebSocket server
-const wsServer = new SyncWebSocketServer(server);
+// Initialize WebSocket server with storage
+// Note: @hono/node-server returns Server type which is compatible
+const wsServer = new SyncWebSocketServer(
+  server as any,
+  {
+    storage: storageConnected ? storage : undefined,
+    pubsub: redisConnected ? pubsub : undefined,
+  }
+);
 
 console.log(`🚀 SyncKit Server running on ${config.host}:${config.port}`);
 console.log(`📊 Health check: http://${config.host}:${config.port}/health`);
@@ -68,10 +145,22 @@ console.log(`🔌 WebSocket: ws://${config.host}:${config.port}/ws`);
 console.log(`🔐 Auth: http://${config.host}:${config.port}/auth`);
 console.log(`🔒 Environment: ${config.nodeEnv}`);
 
+// Log server mode
+const mode = storageConnected && redisConnected ? 'Full (Persistent + Multi-Server)' 
+  : storageConnected ? 'Persistent (Single Server)'
+  : 'Memory-Only (Development)';
+console.log(`📦 Mode: ${mode}`);
+
+if (!storageConnected || !redisConnected) {
+  console.log(`💡 Tip: Server is fully functional in memory-only mode!`);
+}
+
 // Graceful shutdown
-const shutdown = () => {
+const shutdown = async () => {
   console.log('📛 Shutdown signal received, shutting down gracefully...');
-  wsServer.shutdown();
+  
+  await wsServer.close();
+  
   server.close(() => {
     console.log('✅ Server closed');
     process.exit(0);
@@ -87,4 +176,12 @@ const shutdown = () => {
 process.on('SIGTERM', shutdown);
 process.on('SIGINT', shutdown);
 
-export { app, server, wsServer };
+return { app, server, wsServer, storage, pubsub };
+
+} // End startServer()
+
+// Start the server
+startServer().catch((error) => {
+  console.error('❌ Failed to start server:', error);
+  process.exit(1);
+});
