@@ -103,10 +103,7 @@ where
         self.sequence += 1;
         let tag = UniqueTag::new(self.replica_id.clone(), timestamp, self.sequence);
 
-        self.elements
-            .entry(element)
-            .or_default()
-            .insert(tag);
+        self.elements.entry(element).or_default().insert(tag);
     }
 
     /// Remove an element from the set
