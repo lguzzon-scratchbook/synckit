@@ -21,15 +21,15 @@ wasm-bindgen `
 
 Write-Host "JavaScript bindings generated successfully" -ForegroundColor Green
 
-# Get file sizes
-$wasmFile = "pkg\synckit_core_bg.wasm"
+# Get file sizes (use absolute paths for File I/O)
+$wasmFile = Resolve-Path "pkg\synckit_core_bg.wasm"
 $wasmSize = (Get-Item $wasmFile).Length
 $wasmKB = [math]::Round($wasmSize/1024, 2)
 Write-Host "WASM size: $wasmSize bytes (~${wasmKB}KB)" -ForegroundColor Yellow
 
 # Gzip and measure
 $wasmBytes = [System.IO.File]::ReadAllBytes($wasmFile)
-$gzipFile = "pkg\synckit_core_bg.wasm.gz"
+$gzipFile = Join-Path (Get-Location) "pkg\synckit_core_bg.wasm.gz"
 $gzipStream = [System.IO.File]::Create($gzipFile)
 $gzip = New-Object System.IO.Compression.GZipStream($gzipStream, [System.IO.Compression.CompressionMode]::Compress)
 $gzip.Write($wasmBytes, 0, $wasmBytes.Length)
