@@ -1,10 +1,12 @@
 # Getting Started with SyncKit
 
-**Build offline-first apps with real-time sync in 5 minutes.**
+**Build offline-first apps in 5 minutes.**
 
-SyncKit is a production-ready sync engine that makes building local-first applications trivial. No vendor lock-in, true offline support, and automatic conflict resolution—all in a ~53KB bundle.
+SyncKit is a production-ready sync engine that makes building local-first applications trivial. No vendor lock-in, true offline support, and automatic conflict resolution—all in a ~49KB bundle.
 
-> **What you'll build:** A synced todo app that works offline, syncs in real-time across tabs, and persists data locally—in just 5 minutes.
+> **What you'll build:** A todo app that works offline, persists data locally, and is ready for real-time sync (coming soon)—in just 5 minutes.
+>
+> **v0.1.0 Note:** This version focuses on local-first storage and persistence. Network sync and cross-tab synchronization are planned for future releases.
 
 ---
 
@@ -168,9 +170,13 @@ console.log('Todo still here:', data)
 
 ---
 
-### Step 5: Try Multi-Tab Sync (1 minute)
+### Step 5: Multi-Tab Sync ⚠️ (Coming in Future Version)
 
-Open your app in **two browser tabs**. Changes in one tab appear instantly in the other!
+**Note:** Cross-tab synchronization is not yet implemented in v0.1.0. This feature is planned for a future release.
+
+**Planned behavior (future version):**
+
+Open your app in **two browser tabs**. Changes in one tab will appear in the other!
 
 **In Tab 1:**
 ```typescript
@@ -188,30 +194,26 @@ await todo.init()
 await todo.update({ text: 'Hello from Tab 2!' })
 ```
 
-**In Tab 1, you'll see:**
-```
-Tab 1 received: Hello from Tab 2!
-```
-
-**What just happened?**
-- SyncKit uses BroadcastChannel API for instant cross-tab sync
+**What will happen (when implemented):**
+- Real-time cross-tab synchronization
 - No server required—completely client-side
-- <1ms latency between tabs
-- All tabs stay in sync automatically
+- Instant updates between tabs
+
+**Current v0.1.0 behavior:** Each tab maintains its own state. Refreshing a tab will load the latest data from IndexedDB, but live updates between tabs are not yet supported.
 
 ---
 
 ## 🎉 Congratulations!
 
-**You just built offline-first, real-time sync in 5 minutes!**
+**You just built offline-first, persistent storage in 5 minutes!**
 
-Here's what your app can do:
+Here's what your app can do in v0.1.0:
 - ✅ **Works completely offline** - No server needed
 - ✅ **Instant updates** - <1ms local operations
 - ✅ **Persists data** - Survives browser restarts
-- ✅ **Real-time sync** - Syncs across tabs automatically
 - ✅ **Type-safe** - Full TypeScript support
 - ✅ **Conflict-free** - Automatic conflict resolution (LWW)
+- ⚠️ **Cross-tab sync** - Coming in future version
 
 ---
 
@@ -289,18 +291,25 @@ export default function App() {
 
 Now that you've mastered the basics, here's what to explore next:
 
-### 🔌 Connect to a Backend Server
+### 🔌 Connect to a Backend Server ⚠️ (Coming in Future Version)
 
-Add real-time sync across devices:
+**Note:** Network sync features are not yet implemented in v0.1.0. This is planned for a future release.
+
+**Planned behavior (future version):**
 
 ```typescript
 const sync = new SyncKit({
-  serverUrl: 'ws://localhost:8080',  // Your SyncKit server (optional - for remote sync)
-  // Note: Authentication is not yet implemented in v0.1.0
+  serverUrl: 'ws://localhost:8080',  // ⚠️ NOT YET FUNCTIONAL in v0.1.0
+  storage: 'indexeddb',
+  name: 'my-app'
 })
+await sync.init()
+// Future: Will automatically sync with server
 ```
 
-See: [Server Setup Guide](./server-setup.md)
+**Current v0.1.0:** The `serverUrl` option is accepted but not used. SyncKit works offline-only.
+
+See: [Server Setup Guide](./server-setup.md) (for future implementation reference)
 
 ### 📱 Add to Your Existing App
 
@@ -354,25 +363,38 @@ React hooks are included in the main SDK package.
 
 **Solution:** Clear old data or increase quota:
 ```typescript
-// Option 1: Delete old documents
-await todo.delete()
+// Option 1: Delete specific documents
+await sync.deleteDocument('todo-1')  // Delete entire document by ID
 
-// Option 2: Clear all data
+// Option 2: Delete a field from a document
+const todo = sync.document<Todo>('todo-1')
+await todo.init()
+await todo.delete('dueDate')  // Deletes the 'dueDate' field
+
+// Option 3: Clear all data
 await sync.clearAll()
 
-// Option 3: Request persistent storage (Chrome/Edge)
+// Option 4: Request persistent storage (Chrome/Edge)
 if (navigator.storage && navigator.storage.persist) {
   await navigator.storage.persist()
 }
 ```
 
+**Note:** `doc.delete(field)` deletes a **field**, not the whole document. Use `sync.deleteDocument(id)` to delete entire documents.
+
 See: [Storage Management Guide](./storage-management.md)
 
 ---
 
-### Changes not syncing across tabs
+### Changes not syncing across tabs ⚠️
 
-**Solution:** Ensure you're using the same document ID in both tabs:
+**Note:** Cross-tab synchronization is not yet implemented in v0.1.0.
+
+**Current behavior:** Each browser tab maintains its own state. When you refresh a tab, it will load the latest data from IndexedDB, but live updates between tabs are not yet supported.
+
+**Workaround:** Manually refresh the page in other tabs to see updates, or wait for cross-tab sync in a future version.
+
+**Future implementation:** When cross-tab sync is added, ensure you're using the same document ID in both tabs:
 
 ```typescript
 // ✅ Correct - Same ID in both tabs
@@ -421,7 +443,7 @@ Need assistance?
 |---------|:-------:|:--------:|:--------:|:---:|:---------:|
 | **True Offline-First** | ✅ Native | ⚠️ Cache only | ❌ None | ✅ Full | ✅ Full |
 | **Works Without Server** | ✅ Yes | ❌ No | ❌ No | ✅ Yes | ✅ Yes |
-| **Bundle Size** | **~53KB** (~48KB lite) | ~150KB | ~45KB | ~19KB | ~60-78KB |
+| **Bundle Size** | **~49KB** (~44KB lite) | ~150KB | ~45KB | ~19KB | ~60-78KB |
 | **Automatic Conflicts** | ✅ LWW | ✅ LWW | ⚠️ Manual | ✅ CRDT | ✅ CRDT |
 | **Self-Hosted** | ✅ Yes | ❌ No | ✅ Yes | ✅ Yes | ✅ Yes |
 | **Multi-Language Server** | ✅ Yes | ❌ No | ⚠️ Postgres | ❌ No | ❌ No |
@@ -438,12 +460,12 @@ In this guide, you learned how to:
 - ✅ Create and update synced documents
 - ✅ Subscribe to real-time changes
 - ✅ Test offline persistence
-- ✅ Sync across browser tabs
 - ✅ Use React hooks for easier integration
+- ⚠️ Understand v0.1.0 limitations (cross-tab sync coming soon)
 
 **Time taken:** 5 minutes ⏱️
 **Lines of code:** ~20 lines 📝
-**Result:** Production-ready offline-first sync 🚀
+**Result:** Production-ready offline-first storage 🚀
 
 Ready to build something amazing? Check out the [examples](../../examples/) or dive into [offline-first patterns](./offline-first.md)!
 
