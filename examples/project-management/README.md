@@ -2,7 +2,7 @@
 
 A production-ready project management application built with SyncKit, React, and shadcn/ui. This example demonstrates offline-first task management, real-time team collaboration, and conflict-free synchronization in a real-world application.
 
-![Bundle Size](https://img.shields.io/badge/bundle-~210KB%20uncompressed%20|%20~73KB%20gzipped-success)
+![Bundle Size](https://img.shields.io/badge/bundle-~451KB%20uncompressed%20|%20~164KB%20gzipped-success)
 ![SyncKit](https://img.shields.io/badge/synckit-~58KB%20gzipped-brightgreen)
 ![React](https://img.shields.io/badge/react-18.2-blue)
 ![TypeScript](https://img.shields.io/badge/typescript-5.0-blue)
@@ -27,7 +27,7 @@ A production-ready project management application built with SyncKit, React, and
 - **Drag-and-Drop**: Powered by @dnd-kit for smooth, accessible interactions
 - **Type-Safe**: Full TypeScript coverage throughout the codebase
 - **Lightweight State**: Zustand (3KB) for UI state management
-- **Optimized Bundle**: ~73KB gzipped (including all dependencies)
+- **Optimized Bundle**: ~164KB gzipped (including all dependencies)
 - **Full-Featured**: Uses SyncKit default (~58 KB gzipped) - all features included
 - **Responsive Design**: Works seamlessly on desktop and mobile
 
@@ -226,7 +226,7 @@ Enable real-time team collaboration by adding a server URL:
 ```typescript
 const sync = new SyncKit({
   storage: 'indexeddb',
-  url: 'ws://localhost:8080', // SyncKit sync server
+  serverUrl: 'ws://localhost:8080', // SyncKit sync server
 })
 ```
 
@@ -361,7 +361,7 @@ Tailwind CSS                      25 KB       10 KB
 Zustand                            9 KB        3 KB
 Application Code                  22 KB        8 KB
 ────────────────────────────────────────────────────
-Total                           ~210 KB      ~73 KB
+Total                           ~451 KB     ~164 KB
 ```
 
 ### Size-Critical Apps?
@@ -424,19 +424,6 @@ const searchResults = tasks.filter((task) =>
   task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
   task.description.toLowerCase().includes(searchQuery.toLowerCase())
 )
-```
-
-### Activity Timeline
-
-Track task history using SyncKit's version history:
-
-```typescript
-const doc = sync.document<Task>(taskId)
-const history = await doc.getHistory()
-
-history.forEach((version) => {
-  console.log(`${version.timestamp}: ${version.changes}`)
-})
 ```
 
 ### Keyboard Shortcuts
@@ -508,7 +495,7 @@ VITE_APP_NAME=My Project Manager
 ```typescript
 const sync = new SyncKit({
   storage: 'indexeddb',
-  url: import.meta.env.VITE_SYNCKIT_SERVER,
+  serverUrl: import.meta.env.VITE_SYNCKIT_SERVER,
 })
 ```
 
