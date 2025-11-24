@@ -4,9 +4,9 @@
 
 SyncKit is a production-ready sync engine that makes building local-first applications trivial. No vendor lock-in, true offline support, and automatic conflict resolution—all in a ~58KB gzipped bundle.
 
-> **What you'll build:** A todo app that works offline, persists data locally, and is ready for real-time sync (coming soon)—in just 5 minutes.
+> **What you'll build:** A todo app that works offline, persists data locally, and syncs in real-time with a server—in just 5 minutes.
 >
-> **v0.1.0 Note:** This version focuses on local-first storage and persistence. Network sync and cross-tab synchronization are planned for future releases.
+> **v0.1.0 Note:** This version includes local-first storage, persistence, and network sync with WebSocket. Cross-tab synchronization is planned for a future release.
 
 ---
 
@@ -145,7 +145,6 @@ unsubscribe()
 - Subscribed to real-time updates
 - Partial updates automatically merge with existing data
 - Subscriber fires immediately with current state + on every change
-- Works across browser tabs automatically!
 
 ---
 
@@ -213,6 +212,7 @@ Here's what your app can do in v0.1.0:
 - ✅ **Persists data** - Survives browser restarts
 - ✅ **Type-safe** - Full TypeScript support
 - ✅ **Conflict-free** - Automatic conflict resolution (LWW)
+- ✅ **Network sync** - Real-time sync with WebSocket
 - ⚠️ **Cross-tab sync** - Coming in future version
 
 ---
@@ -291,25 +291,29 @@ export default function App() {
 
 Now that you've mastered the basics, here's what to explore next:
 
-### 🔌 Connect to a Backend Server ⚠️ (Coming in Future Version)
+### 🔌 Connect to a Backend Server
 
-**Note:** Network sync features are not yet implemented in v0.1.0. This is planned for a future release.
-
-**Planned behavior (future version):**
+Network sync is fully implemented in v0.1.0 with WebSocket support!
 
 ```typescript
 const sync = new SyncKit({
-  serverUrl: 'ws://localhost:8080',  // ⚠️ NOT YET FUNCTIONAL in v0.1.0
+  serverUrl: 'ws://localhost:8080',  // ✅ Enables real-time sync
   storage: 'indexeddb',
   name: 'my-app'
 })
 await sync.init()
-// Future: Will automatically sync with server
+// ✅ Automatically syncs with server
+// ✅ Offline queue with auto-replay when reconnected
+// ✅ Automatic conflict resolution via LWW
 ```
 
-**Current v0.1.0:** The `serverUrl` option is accepted but not used. SyncKit works offline-only.
+**What you get:**
+- ✅ Real-time document synchronization across clients
+- ✅ Automatic reconnection with exponential backoff
+- ✅ Offline queue that replays operations when back online
+- ✅ Network status tracking with `sync.getNetworkStatus()`
 
-See: [Server Setup Guide](./server-setup.md) (for future implementation reference)
+See: [Server Setup Guide](./server-setup.md) and [Network API Reference](../api/NETWORK_API.md)
 
 ### 📱 Add to Your Existing App
 
@@ -461,6 +465,7 @@ In this guide, you learned how to:
 - ✅ Subscribe to real-time changes
 - ✅ Test offline persistence
 - ✅ Use React hooks for easier integration
+- ✅ Connect to a backend server with WebSocket
 - ⚠️ Understand v0.1.0 limitations (cross-tab sync coming soon)
 
 **Time taken:** 5 minutes ⏱️
