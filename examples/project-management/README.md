@@ -146,6 +146,41 @@ This separation keeps UI state ephemeral and fast while ensuring all data operat
 
 ### SyncKit Integration
 
+#### Persistent Task Loading
+
+On app initialization, tasks are loaded from IndexedDB storage:
+
+```typescript
+// App.tsx:21-75
+useEffect(() => {
+  const initializeApp = async () => {
+    await sync.init()
+    await loadTasksFromStorage()  // Load all persisted tasks
+    setSyncReady(true)
+  }
+
+  const loadTasksFromStorage = async () => {
+    // Get task IDs from localStorage
+    const taskIds = JSON.parse(localStorage.getItem('synckit-task-ids') || '[]')
+
+    // Load each task from IndexedDB
+    const loadedTasks = []
+    for (const taskId of taskIds) {
+      const doc = sync.document(taskId)
+      await doc.init()  // Loads from IndexedDB and subscribes to updates
+      loadedTasks.push(doc.get())
+    }
+
+    // Merge with hardcoded tasks and add user-created tasks
+    useStore.setState({ tasks: mergedTasks })
+  }
+
+  initializeApp()
+}, [])
+```
+
+When tasks are created or deleted, their IDs are saved to localStorage (see TaskModal.tsx:91-113, 129-148). This allows the app to know which tasks exist and load them on the next session.
+
 #### Task Synchronization
 
 Every task is a SyncKit document that automatically syncs:

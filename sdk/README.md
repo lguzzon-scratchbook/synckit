@@ -73,10 +73,10 @@ sync.onNetworkStatusChange((status) => {
 
 // Create and sync document
 const doc = sync.document<Todo>('todo-1')
-await doc.init()
+await doc.init()  // Automatically subscribes to real-time server updates!
 await doc.update({ title: 'Buy milk', completed: false })
 
-// Document automatically syncs to server!
+// Changes sync instantly to server and other clients
 ```
 
 ## 📦 Installation
@@ -227,7 +227,7 @@ interface SyncKitConfig {
 - `toJSON()` - Export as JSON
 - `merge(other)` - Merge with another document
 
-**Important:** Always call `await doc.init()` before using a document.
+**Important:** Always call `await doc.init()` before using a document. When a `serverUrl` is configured, `init()` automatically subscribes the document to real-time server updates, enabling instant synchronization with other clients.
 
 ### React Hooks
 
