@@ -128,11 +128,11 @@ This example demonstrates:
 - ✅ Document-level sync with `useSyncDocument`
 - ✅ IndexedDB persistence
 - ✅ Type-safe operations
-- ✅ Automatic conflict resolution
+- ✅ Automatic conflict resolution (Last-Write-Wins)
 
 For more advanced features, see:
-- **Collaborative Editor** - Text CRDT with character-level sync
-- **Real-World Example** - Complex app with multiple document types
+- **[Collaborative Editor](../collaborative-editor/)** - Multi-user editing with conflict resolution
+- **[Project Management](../project-management/)** - Complex app with Kanban board and cross-tab sync
 
 ## Learn More
 
