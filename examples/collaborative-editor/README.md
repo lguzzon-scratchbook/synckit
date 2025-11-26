@@ -3,7 +3,7 @@
 A production-ready collaborative Markdown and code editor built with SyncKit, React, and CodeMirror 6. This example demonstrates SyncKit's offline-first capabilities, real-time sync, and conflict-free collaboration.
 
 ![Bundle Size](https://img.shields.io/badge/bundle-~721KB%20uncompressed%20|%20~238KB%20gzipped-success)
-![SyncKit](https://img.shields.io/badge/synckit-~58KB%20gzipped-brightgreen)
+![SyncKit](https://img.shields.io/badge/synckit-~59KB%20gzipped-brightgreen)
 ![React](https://img.shields.io/badge/react-18.2-blue)
 ![TypeScript](https://img.shields.io/badge/typescript-5.0-blue)
 
@@ -23,7 +23,7 @@ A production-ready collaborative Markdown and code editor built with SyncKit, Re
 ### Technical Highlights
 
 - **Optimized Bundle**: ~238KB gzipped (CodeMirror 6 + React + SyncKit)
-- **Full-Featured**: Uses SyncKit full SDK (~58KB gzipped) - includes network sync + offline queue
+- **Full-Featured**: Uses SyncKit full SDK (~59KB gzipped) - includes network sync + offline queue
 - **Type-Safe**: Full TypeScript support throughout
 - **Modern Stack**: React 18, Vite, CodeMirror 6, Zustand
 - **Production-Ready**: Comprehensive error handling, accessibility, and UX polish
@@ -262,7 +262,7 @@ This collaborative editor needs **offline-first document sync** with real-time u
 - ✅ Offline-first architecture
 - ✅ Conflict-free convergence (no lost edits)
 - ✅ Real-time collaboration
-- ✅ Full SDK with network sync: 58KB gzipped
+- ✅ Full SDK with network sync: 59KB gzipped
 - ✅ Lite SDK (offline-only): 45KB gzipped
 
 **Full-featured collaborative editing** in a lightweight package.
@@ -274,7 +274,7 @@ Component                    Uncompressed    Gzipped
 ────────────────────────────────────────────────────
 CodeMirror 6                     410 KB      124 KB
 React 18 + ReactDOM              142 KB       45 KB
-SyncKit (WASM + SDK)             138 KB       58 KB
+SyncKit (WASM + SDK)             138 KB       59 KB
 Zustand                            9 KB        3 KB
 Application Code                  22 KB        8 KB
 ────────────────────────────────────────────────────
@@ -288,13 +288,13 @@ Total                           ~721 KB     ~238 KB
 import { SyncKit } from '@synckit/sdk/lite'  // Local-only, no network
 ```
 
-**Trade-off:** No server sync. For collaborative editors, the full SDK (58KB gzipped) is recommended for network capabilities.
+**Trade-off:** No server sync. For collaborative editors, the full SDK (59KB gzipped) is recommended for network capabilities.
 
 ### Why These Choices?
 
 - **CodeMirror 6** (~124KB) vs Monaco (2MB+): 94% smaller, same functionality
 - **Zustand** (~3KB) vs Redux (20KB+): 85% smaller, simpler API
-- **SyncKit** (~58KB gzipped): Document-level sync with full network capabilities
+- **SyncKit** (~59KB gzipped): Document-level sync with full network capabilities
 
 ## Extending This Example
 

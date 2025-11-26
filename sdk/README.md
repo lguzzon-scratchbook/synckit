@@ -2,7 +2,7 @@
 
 TypeScript SDK for SyncKit - Production-grade local-first sync with real-time collaboration.
 
-**Bundle Size:** 58KB gzipped (full) or 45KB gzipped (lite) - Competitive with Yjs (~19KB), Automerge (~60-78KB), and Firebase (~150KB).
+**Bundle Size:** 59KB gzipped (full) or 45KB gzipped (lite) - Competitive with Yjs (~19KB), Automerge (~60-78KB), and Firebase (~150KB).
 
 ## 🚀 Quick Start
 
@@ -248,10 +248,10 @@ interface SyncKitConfig {
 
 | Build | Total Size | JavaScript | WASM | Use Case |
 |-------|------------|------------|------|----------|
-| **Full SDK** | **58KB** | 9KB | 48KB | Complete with network sync |
-| **Lite SDK** | **45KB** | 1KB | 43KB | Offline-only, no network |
+| **Full SDK** | **59KB** | 10KB | 49KB | Complete with network sync |
+| **Lite SDK** | **45KB** | 1.5KB | 44KB | Offline-only, no network |
 
-**Network overhead:** Only 13KB gzipped for complete WebSocket + sync implementation.
+**Network overhead:** Only 14KB gzipped for complete WebSocket + sync implementation.
 
 ### Uncompressed Sizes
 
@@ -266,7 +266,7 @@ interface SyncKitConfig {
 
 | Library | Size (gzipped) | Offline-First | Real-time Sync |
 |---------|----------------|---------------|----------------|
-| **SyncKit Full** | 58KB | ✅ Native | ✅ Built-in |
+| **SyncKit Full** | 59KB | ✅ Native | ✅ Built-in |
 | **SyncKit Lite** | 45KB | ✅ Native | ❌ No |
 | Yjs | ~19KB | ⚠️ Limited | ✅ Yes |
 | Automerge | ~60-78KB | ✅ Native | ✅ Yes |
@@ -425,7 +425,6 @@ Complete working examples available:
 - **[Collaborative Editor](../examples/collaborative-editor)** - Markdown/code editor with real-time collaboration
 - **[Project Management](../examples/project-management)** - Kanban board with drag-and-drop
 - **[Todo App](../examples/todo-app)** - Simple todo list with sync
-- **[Real-World App](../examples/real-world)** - Full-featured application example
 
 ## 🚀 Performance
 

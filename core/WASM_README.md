@@ -94,7 +94,7 @@ This includes a **complete feature set**:
 - Text CRDT (YATA) - typically 20-30KB alone
 - Protocol serialization
 
-**Design Philosophy**: Ship production-ready features over minimal size. 51KB is competitive with industry leaders while providing complete CRDT functionality.
+**Design Philosophy**: Ship production-ready features over minimal size. 49KB WASM core (59KB full SDK) is competitive with industry leaders while providing complete CRDT functionality.
 
 ### Future Optimization Path (v0.2.0+)
 
@@ -111,8 +111,10 @@ Optional optimization strategies for those who need smaller bundles:
    ```
 
 3. **Tiered builds** (available in v0.1.0):
-   - `synckit-lite`: LWW + Vector Clock only (44KB gzipped)
-   - `synckit-default`: All features including Text CRDT, Counters, Sets, network protocol (49KB gzipped)
+   - `synckit-lite`: Offline-only with LWW sync (45KB gzipped full SDK: 44KB WASM + 1.5KB JS)
+   - `synckit-default`: Full SDK with network sync + offline queue (59KB gzipped full SDK: 49KB WASM + 10KB JS)
+
+**Note:** The WASM core includes Text CRDT, Counters, and Sets implementations, but these are not yet exposed in the SDK API in v0.1.0 (planned for v0.2.0). The default build includes the complete WASM core with network protocol support.
 
 **Note**: Most users prefer full functionality over minimal size. We optimize for features first, then size.
 
