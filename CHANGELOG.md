@@ -189,7 +189,7 @@ If you were using SyncKit during development (Phases 1-9):
 
 ```typescript
 // No breaking changes! API is stable
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 const sync = new SyncKit({
   storage: 'indexeddb',
@@ -208,7 +208,7 @@ const status = sync.getNetworkStatus()
 console.log(status?.queueSize)
 
 // Use React hooks
-import { useSyncDocument, useNetworkStatus } from '@synckit/sdk'
+import { useSyncDocument, useNetworkStatus } from '@synckit-js/sdk'
 
 function MyComponent() {
   const [todo, { update }] = useSyncDocument<Todo>('todo-1')

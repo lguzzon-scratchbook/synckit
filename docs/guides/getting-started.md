@@ -28,16 +28,16 @@ Install SyncKit with your favorite package manager:
 
 ```bash
 # npm
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 
 # yarn
-yarn add @synckit/sdk
+yarn add @synckit-js/sdk
 
 # pnpm
-pnpm add @synckit/sdk
+pnpm add @synckit-js/sdk
 
 # bun
-bun add @synckit/sdk
+bun add @synckit-js/sdk
 ```
 
 **For React projects**, the React hooks are included in the SDK package (no separate install needed).
@@ -53,7 +53,7 @@ bun add @synckit/sdk
 Create a SyncKit instance. It works offline-only by default—no server required!
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // Initialize SyncKit (works offline-only)
 const sync = new SyncKit({
@@ -225,8 +225,8 @@ Using React? Here's the same example with hooks:
 
 ```tsx
 import React, { useEffect, useState } from 'react'
-import { SyncKit } from '@synckit/sdk'
-import { SyncProvider, useSyncDocument } from '@synckit/sdk/react'
+import { SyncKit } from '@synckit-js/sdk'
+import { SyncProvider, useSyncDocument } from '@synckit-js/sdk/react'
 
 interface Todo {
   id: string
@@ -354,11 +354,11 @@ Explore the complete API:
 
 ## Common Issues
 
-### "Module not found: @synckit/sdk"
+### "Module not found: @synckit-js/sdk"
 
 **Solution:** Make sure you've installed the package:
 ```bash
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 ```
 
 React hooks are included in the main SDK package.

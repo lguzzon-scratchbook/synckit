@@ -53,7 +53,7 @@ SyncKit testing follows these principles:
 
 ```typescript
 import { describe, test, expect, beforeEach } from 'vitest'
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 describe('Document operations', () => {
   let synckit: SyncKit
@@ -494,7 +494,7 @@ test('idempotence property: applying operation twice = applying once', async () 
 Test that documents sync correctly with a server:
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 describe('Network sync', () => {
   test('should sync changes to server', async () => {
@@ -1065,7 +1065,7 @@ test('should handle rapid updates', async () => {
 
 ```typescript
 import { render, screen, waitFor } from '@testing-library/react'
-import { useSyncDocument } from '@synckit/sdk'
+import { useSyncDocument } from '@synckit-js/sdk'
 import userEvent from '@testing-library/user-event'
 
 test('should sync state to React component', async () => {
@@ -1121,7 +1121,7 @@ test('should sync state to React component', async () => {
 ### Testing with Network Status Hooks
 
 ```typescript
-import { useNetworkStatus, useSyncState } from '@synckit/sdk'
+import { useNetworkStatus, useSyncState } from '@synckit-js/sdk'
 
 test('should track network status in React', async () => {
   function NetworkMonitor() {

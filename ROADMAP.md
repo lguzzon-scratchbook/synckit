@@ -896,7 +896,7 @@ tests/chaos/chaos-helpers.ts                # Chaos test utilities
    - ✅ Issue templates
 
 4. **Package Publishing** ⏳
-   - ⏳ NPM: `@synckit/sdk` (client SDK), `@synckit/server` (backend server)
+   - ⏳ NPM: `@synckit-js/sdk` (client SDK), `@synckit-js/server` (backend server)
    - ⏳ GitHub releases (v0.1.0)
    - ⏳ Docker Hub (server image)
    - 📝 **Crates.io:** Deferred to v0.3.0 (Rust core bundled in SDK, not needed separately)

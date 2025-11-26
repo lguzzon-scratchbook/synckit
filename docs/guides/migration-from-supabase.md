@@ -336,7 +336,7 @@ function TodoComponent({ id }: { id: string }) {
 
 **After (SyncKit):**
 ```typescript
-import { useSyncDocument } from '@synckit/sdk/react'
+import { useSyncDocument } from '@synckit-js/sdk/react'
 
 function TodoComponent({ id }: { id: string }) {
   const [todo, { update }] = useSyncDocument<Todo>(id)

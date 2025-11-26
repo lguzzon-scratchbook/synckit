@@ -148,7 +148,7 @@ if (performance.memory) {
 Monitor network sync performance:
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 const synckit = new SyncKit({
   storage: 'indexeddb',
@@ -225,7 +225,7 @@ Choose the variant that meets your needs:
 
 ```typescript
 // Lite (~45 KB) - Local-only, no network sync
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 
 const synckit = new SyncKit({
   storage: 'indexeddb',
@@ -234,7 +234,7 @@ const synckit = new SyncKit({
 })
 
 // Default (~59 KB) - Full network sync
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 const synckit = new SyncKit({
   storage: 'indexeddb',
@@ -251,14 +251,14 @@ Variants are already optimized - you automatically get only what you import:
 
 ```typescript
 // ✅ Good: Import from one variant
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // ❌ Bad: Mixing variants (duplicates WASM)
-import { SyncKit } from '@synckit/sdk'
-import { SyncDocument } from '@synckit/sdk/lite'  // Loads separate WASM!
+import { SyncKit } from '@synckit-js/sdk'
+import { SyncDocument } from '@synckit-js/sdk/lite'  // Loads separate WASM!
 
 // ✅ Good: Import everything from one variant
-import { SyncKit, SyncDocument } from '@synckit/sdk'
+import { SyncKit, SyncDocument } from '@synckit-js/sdk'
 ```
 
 **Vite configuration:**
@@ -271,7 +271,7 @@ export default {
       output: {
         manualChunks: {
           // Separate vendor chunks
-          'synckit': ['@synckit/sdk'],
+          'synckit': ['@synckit-js/sdk'],
           'react-vendor': ['react', 'react-dom']
         }
       }
@@ -287,7 +287,7 @@ Load SyncKit on-demand for better initial load:
 ```typescript
 // Lazy load SyncKit
 const initSync = async () => {
-  const { SyncKit } = await import('@synckit/sdk')
+  const { SyncKit } = await import('@synckit-js/sdk')
   const synckit = new SyncKit({
     storage: 'indexeddb',
     name: 'my-app',
@@ -319,7 +319,7 @@ Load SyncKit only when needed:
 // Initial load: No SyncKit yet
 // Later: Load when user enables offline sync
 async function enableOfflineSync() {
-  const { SyncKit } = await import('@synckit/sdk')
+  const { SyncKit } = await import('@synckit-js/sdk')
   const synckit = new SyncKit({
     storage: 'indexeddb',
     name: 'my-app',
@@ -336,7 +336,7 @@ async function enableOfflineSync() {
 
 ```typescript
 // Load React hooks only when needed
-const { useSyncDocument } = await import('@synckit/sdk')
+const { useSyncDocument } = await import('@synckit-js/sdk')
 ```
 
 ### WASM Optimization
@@ -366,7 +366,7 @@ function TodoItem({ id }) {
 }
 
 // ✅ Proper cleanup with hook
-import { useSyncDocument } from '@synckit/sdk'
+import { useSyncDocument } from '@synckit-js/sdk'
 
 function TodoItem({ id }) {
   const [data, { update }] = useSyncDocument<Todo>(id)
@@ -530,7 +530,7 @@ await todo.update({
 Keep an eye on offline queue during extended offline periods:
 
 ```typescript
-import { useNetworkStatus } from '@synckit/sdk'
+import { useNetworkStatus } from '@synckit-js/sdk'
 
 function NetworkMonitor() {
   const status = useNetworkStatus()
@@ -626,7 +626,7 @@ Move sync operations to a background thread for 60fps UI:
 
 ```typescript
 // sync-worker.ts
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 const synckit = new SyncKit({
   storage: 'indexeddb',
@@ -709,7 +709,7 @@ worker.addEventListener('message', (event) => {
 #### Use Built-in Hooks
 
 ```typescript
-import { useSyncDocument, useNetworkStatus } from '@synckit/sdk'
+import { useSyncDocument, useNetworkStatus } from '@synckit-js/sdk'
 
 function TodoItem({ id }: { id: string }) {
   // ✅ Efficient: Hook handles init and cleanup
@@ -809,9 +809,9 @@ function TodoList({ todos }: { todos: Todo[] }) {
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
-// Note: @synckit/sdk/vue coming in v0.2.0
+// Note: @synckit-js/sdk/vue coming in v0.2.0
 // For now, use the core SDK with Vue reactivity
 const synckit = new SyncKit({
   storage: 'indexeddb',
@@ -846,9 +846,9 @@ const completedTodos = computed(() =>
 <script>
   import { writable, derived } from 'svelte/store'
   import { onMount } from 'svelte'
-  import { SyncKit } from '@synckit/sdk'
+  import { SyncKit } from '@synckit-js/sdk'
 
-  // Note: @synckit/sdk/svelte coming in v0.2.0
+  // Note: @synckit-js/sdk/svelte coming in v0.2.0
   // For now, use the core SDK with Svelte stores
   const synckit = new SyncKit({
     storage: 'indexeddb',
@@ -1064,7 +1064,7 @@ synckit.onNetworkStatusChange?.((status) => {
 Build a real-time performance monitoring component:
 
 ```typescript
-import { useNetworkStatus, useSyncState } from '@synckit/sdk'
+import { useNetworkStatus, useSyncState } from '@synckit-js/sdk'
 import { useEffect, useState } from 'react'
 
 function PerformanceDashboard() {

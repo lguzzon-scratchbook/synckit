@@ -455,7 +455,7 @@ pub fn merge_documents(local: &Document, remote: &Document) -> Document {
 Install SyncKit:
 
 ```bash
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 ```
 
 Initialize in your app:
@@ -469,7 +469,7 @@ const doc = sync.document<Todo>('todo-1')
 ## quick start
 
 install it
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 
 then use it
 const sync = new SyncKit()

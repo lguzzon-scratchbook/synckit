@@ -1,4 +1,4 @@
-# @synckit/sdk
+# @synckit-js/sdk
 
 TypeScript SDK for SyncKit - Production-grade local-first sync with real-time collaboration.
 
@@ -9,7 +9,7 @@ TypeScript SDK for SyncKit - Production-grade local-first sync with real-time co
 ### Offline-Only Mode
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // Initialize (offline-only)
 const sync = new SyncKit({
@@ -46,7 +46,7 @@ const todo = doc.get()
 ### With Network Sync (v0.1.0)
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // Initialize with server sync
 const sync = new SyncKit({
@@ -82,11 +82,11 @@ await doc.update({ title: 'Buy milk', completed: false })
 ## 📦 Installation
 
 ```bash
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 # or
-yarn add @synckit/sdk
+yarn add @synckit-js/sdk
 # or
-pnpm add @synckit/sdk
+pnpm add @synckit-js/sdk
 ```
 
 ## 🎯 Features
@@ -116,7 +116,7 @@ pnpm add @synckit/sdk
 ### Basic Usage
 
 ```tsx
-import { SyncProvider, useSyncDocument } from '@synckit/sdk/react'
+import { SyncProvider, useSyncDocument } from '@synckit-js/sdk/react'
 
 // 1. Wrap your app
 function App() {
@@ -150,7 +150,7 @@ function TodoItem({ id }: { id: string }) {
 ### Network-Aware Components (v0.1.0)
 
 ```tsx
-import { useNetworkStatus, useSyncState } from '@synckit/sdk/react'
+import { useNetworkStatus, useSyncState } from '@synckit-js/sdk/react'
 
 function NetworkIndicator() {
   const status = useNetworkStatus()
@@ -301,7 +301,7 @@ const sync = new SyncKit({ storage: 'memory' })
 
 ### Custom Adapter
 ```typescript
-import type { StorageAdapter } from '@synckit/sdk'
+import type { StorageAdapter } from '@synckit-js/sdk'
 
 class MyStorage implements StorageAdapter {
   async get(key: string): Promise<string | null> {

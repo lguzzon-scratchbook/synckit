@@ -93,7 +93,7 @@ Document content is managed by SyncKit, which handles:
 The editor uses SyncKit's React hooks for seamless sync:
 
 ```typescript
-import { useSyncDocument } from '@synckit/sdk/react'
+import { useSyncDocument } from '@synckit-js/sdk/react'
 
 function Editor({ documentId }) {
   // Returns [data, setters, document]
@@ -145,7 +145,7 @@ function Editor({ documentId }) {
 
 3. **Network Status Monitoring** (`Header.tsx:12-41`)
    ```typescript
-   import { useNetworkStatus } from '@synckit/sdk/react'
+   import { useNetworkStatus } from '@synckit-js/sdk/react'
 
    const networkStatus = useNetworkStatus()
 
@@ -285,7 +285,7 @@ Total                           ~721 KB     ~238 KB
 
 **Need smaller bundle?** Use SyncKit Lite (45KB gzipped, 85KB uncompressed):
 ```typescript
-import { SyncKit } from '@synckit/sdk/lite'  // Local-only, no network
+import { SyncKit } from '@synckit-js/sdk/lite'  // Local-only, no network
 ```
 
 **Trade-off:** No server sync. For collaborative editors, the full SDK (59KB gzipped) is recommended for network capabilities.

@@ -403,7 +403,7 @@ Total                           ~451 KB     ~164 KB
 
 **Need smaller bundle?** Use SyncKit Lite (~45 KB gzipped):
 ```typescript
-import { SyncKit } from '@synckit/sdk/lite'  // Local-only, ~45 KB gzipped
+import { SyncKit } from '@synckit-js/sdk/lite'  // Local-only, ~45 KB gzipped
 ```
 
 **Trade-off:** No server sync (local-only mode). For most apps, the 13 KB difference isn't worth losing server sync.

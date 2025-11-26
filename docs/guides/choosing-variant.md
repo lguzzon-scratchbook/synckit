@@ -33,7 +33,7 @@ Start here
 
 **Import:**
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 ```
 
 **SDK v0.1.0 Features (Fully Functional):**
@@ -81,7 +81,7 @@ import { SyncKit } from '@synckit/sdk'
 
 **Code example (v0.1.0 - Network Sync):**
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // Enable network sync with serverUrl
 const sync = new SyncKit({
@@ -132,7 +132,7 @@ console.log('Connected:', status?.connectionState)
 
 **Import:**
 ```typescript
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 ```
 
 **SDK v0.1.0 Features (Local-Only):**
@@ -173,7 +173,7 @@ import { SyncKit } from '@synckit/sdk/lite'
 
 **Code example (v0.1.0):**
 ```typescript
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 
 const sync = new SyncKit({
   storage: 'indexeddb',
@@ -219,10 +219,10 @@ Switching between variants is seamless - just change the import:
 
 ```typescript
 // Before (lite)
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 
 // After (need server sync)
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // All core APIs remain exactly the same!
 // No breaking changes, just additional features available
@@ -232,11 +232,11 @@ import { SyncKit } from '@synckit/sdk'
 
 ```typescript
 // ❌ BAD: Imports from multiple variants (duplicates WASM)
-import { SyncKit } from '@synckit/sdk'
-import { SyncDocument } from '@synckit/sdk/lite'  // Imports separate WASM!
+import { SyncKit } from '@synckit-js/sdk'
+import { SyncDocument } from '@synckit-js/sdk/lite'  // Imports separate WASM!
 
 // ✅ GOOD: Import everything from one variant
-import { SyncKit, SyncDocument } from '@synckit/sdk'
+import { SyncKit, SyncDocument } from '@synckit-js/sdk'
 ```
 
 **Migration is non-breaking:**
@@ -381,7 +381,7 @@ Understanding the size trade-offs:
 Use the Default variant unless you have a specific reason not to. It's the recommended default for 95% of applications.
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 ```
 
 You only need to consider Lite if:
@@ -398,12 +398,12 @@ You only need to consider Lite if:
 **Example of premature optimization:**
 ```typescript
 // ❌ BAD: Using Lite to save 14 KB, missing out on network sync
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 // Later: "We need cross-device sync now..."
 // Now you have to refactor
 
 // ✅ GOOD: Use Default with network sync ready
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 // serverUrl enables network sync in v0.1.0
 ```
 
@@ -500,14 +500,14 @@ Otherwise, use Default and get network sync capabilities (available NOW in v0.1.
 Ready to build? Here's what to do next:
 
 1. **Choose your variant** using the decision tree above
-2. **Install SyncKit:** `npm install @synckit/sdk`
+2. **Install SyncKit:** `npm install @synckit-js/sdk`
 3. **Import your variant:**
    ```typescript
    // Most apps
-   import { SyncKit } from '@synckit/sdk'
+   import { SyncKit } from '@synckit-js/sdk'
 
    // Local-only apps
-   import { SyncKit } from '@synckit/sdk/lite'
+   import { SyncKit } from '@synckit-js/sdk/lite'
    ```
 4. **Build your app:** Follow our [Getting Started Guide](./getting-started.md)
 
@@ -543,7 +543,7 @@ Ready to build? Here's what to do next:
 
 **Default (Recommended):**
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 ```
 - 59 KB gzipped total (48KB WASM + 10KB JS)
 - Includes network sync (available NOW in v0.1.0)
@@ -554,7 +554,7 @@ import { SyncKit } from '@synckit/sdk'
 
 **Lite (Size-Optimized):**
 ```typescript
-import { SyncKit } from '@synckit/sdk/lite'
+import { SyncKit } from '@synckit-js/sdk/lite'
 ```
 - 45 KB gzipped total (43KB WASM + 1.5KB JS)
 - Local-only, no server sync

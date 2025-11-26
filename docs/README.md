@@ -159,10 +159,10 @@ Learn how to test offline-first apps:
 
 ### Common Issues
 
-**Module not found: @synckit/sdk**
+**Module not found: @synckit-js/sdk**
 ```bash
-# Core SDK (includes React hooks via @synckit/sdk/react)
-npm install @synckit/sdk
+# Core SDK (includes React hooks via @synckit-js/sdk/react)
+npm install @synckit-js/sdk
 
 # React is a peer dependency if you use the React hooks
 npm install react

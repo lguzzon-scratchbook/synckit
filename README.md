@@ -114,14 +114,14 @@ Open source and self-hostable. No vendor lock-in, no surprise $2,000/month bills
 ### Installation
 
 ```bash
-npm install @synckit/sdk
+npm install @synckit-js/sdk
 ```
 
 ### Your First Synced App
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
-import { SyncProvider, useSyncDocument } from '@synckit/sdk/react'
+import { SyncKit } from '@synckit-js/sdk'
+import { SyncProvider, useSyncDocument } from '@synckit-js/sdk/react'
 
 // Initialize (works offline-only, no server needed!)
 const sync = new SyncKit()
@@ -161,7 +161,7 @@ function TodoApp() {
 
 **Bundle:** SyncKit (~59 KB gzipped) + React (~130 KB) = **~189 KB total**
 
-**Size-critical?** `import { SyncKit } from '@synckit/sdk/lite'` (~45 KB gzipped, local-only)
+**Size-critical?** `import { SyncKit } from '@synckit-js/sdk/lite'` (~45 KB gzipped, local-only)
 
 **[Full tutorial (5 minutes) →](docs/guides/getting-started.md)**
 
@@ -299,12 +299,12 @@ await counter.increment()
 ## 📦 Packages
 
 ### Core
-- **`@synckit/sdk`** - Core SDK (TypeScript) + WASM engine
-- **`@synckit/sdk/react`** - React hooks and components (export from SDK)
-- **`@synckit/sdk/lite`** - Lightweight version (local-only, 45KB gzipped)
+- **`@synckit-js/sdk`** - Core SDK (TypeScript) + WASM engine
+- **`@synckit-js/sdk/react`** - React hooks and components (export from SDK)
+- **`@synckit-js/sdk/lite`** - Lightweight version (local-only, 45KB gzipped)
 
 ### Servers
-- **`@synckit/server`** - Bun + Hono reference server (production-ready)
+- **`@synckit-js/server`** - Bun + Hono reference server (production-ready)
 
 ---
 
@@ -330,7 +330,7 @@ await counter.increment()
 - 🚧 **Text CRDTs** - Collaborative text editing (`useText` hook) for character-level sync
 - 🚧 **Counter CRDTs** - Distributed counters (`useCounter` hook) for conflict-free increments
 - 🚧 **BroadcastChannel Cross-Tab** - Direct client-to-client sync without server (offline multi-tab)
-- 🚧 **Framework Adapters** - Vue composables (`@synckit/sdk/vue`), Svelte stores (`@synckit/sdk/svelte`)
+- 🚧 **Framework Adapters** - Vue composables (`@synckit-js/sdk/vue`), Svelte stores (`@synckit-js/sdk/svelte`)
 - 🚧 **Multi-Language Servers** - Python, Go, Rust server implementations (TypeScript complete)
 - 🚧 **Advanced Storage** - OPFS (Origin Private File System), SQLite adapter
 - 🚧 **Conflict UI** - Visual conflict resolution interface for complex merge scenarios

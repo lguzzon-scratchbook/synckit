@@ -11,7 +11,7 @@
 
 ### ✅ Implemented in v0.1.0
 
-**Core SDK (`@synckit/sdk`):**
+**Core SDK (`@synckit-js/sdk`):**
 - ✅ `SyncKit` class: `init()`, `document()`, `listDocuments()`, `deleteDocument()`, `clearAll()`
 - ✅ `SyncDocument<T>` with LWW-CRDT
 - ✅ Document methods: `init()`, `get()`, `getField()`, `set()`, `update()`, `delete()`, `subscribe()`, `merge()`, `toJSON()`, `dispose()`
@@ -26,7 +26,7 @@
 - ✅ Binary message protocol
 - ✅ Vector clock conflict resolution
 
-**React (`@synckit/sdk/react`):**
+**React (`@synckit-js/sdk/react`):**
 - ✅ `SyncProvider`, `useSyncKit()`, `useSyncDocument()`, `useSyncField()`, `useSyncDocumentList()`
 - ✅ `useNetworkStatus()`, `useSyncState()`, `useSyncDocumentWithState()`
 
@@ -72,7 +72,7 @@ This document defines the TypeScript SDK API for SyncKit. The design follows the
 ### SyncKit Constructor
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 // Minimal configuration (offline-only mode)
 const sync = new SyncKit()
@@ -535,14 +535,14 @@ class CRDTSet<T> {
 
 ## React Hooks
 
-**Package:** `@synckit/sdk/react`
+**Package:** `@synckit-js/sdk/react`
 
 ### Setup
 
 ```typescript
 import { useState, useEffect } from 'react'
-import { SyncProvider } from '@synckit/sdk/react'
-import { SyncKit } from '@synckit/sdk'
+import { SyncProvider } from '@synckit-js/sdk/react'
+import { SyncKit } from '@synckit-js/sdk'
 
 // ✅ Initialize SyncKit and wrap app with provider
 function App() {
@@ -657,7 +657,7 @@ function CustomComponent() {
 
 ```typescript
 // ❌ NOT IMPLEMENTED - Text CRDT not in v0.1.0
-import { useText } from '@synckit/sdk/react'
+import { useText } from '@synckit-js/sdk/react'
 
 function NoteEditor({ id }: { id: string }) {
   const [text, { insert, delete: del, append }] = useText(id)
@@ -669,7 +669,7 @@ function NoteEditor({ id }: { id: string }) {
 
 ```typescript
 // ❌ NOT IMPLEMENTED - Counter CRDT not in v0.1.0
-import { useCounter } from '@synckit/sdk/react'
+import { useCounter } from '@synckit-js/sdk/react'
 
 function LikeButton({ postId }: { postId: string }) {
   const [likes, { increment, decrement }] = useCounter(`likes-${postId}`)
@@ -681,7 +681,7 @@ function LikeButton({ postId }: { postId: string }) {
 
 ```typescript
 // ❌ NOT IMPLEMENTED - Set CRDT not in v0.1.0
-import { useSet } from '@synckit/sdk/react'
+import { useSet } from '@synckit-js/sdk/react'
 
 function TagList({ docId }: { docId: string }) {
   const [tags, { add, remove }] = useSet<string>(`tags-${docId}`)
@@ -774,12 +774,12 @@ try {
 
 ```typescript
 // ✅ Core classes
-export { SyncKit } from '@synckit/sdk'
-export { SyncDocument } from '@synckit/sdk'
+export { SyncKit } from '@synckit-js/sdk'
+export { SyncDocument } from '@synckit-js/sdk'
 
 // ✅ Storage adapters
-export { MemoryStorage, IndexedDBStorage, createStorage } from '@synckit/sdk'
-export type { StorageAdapter, StoredDocument } from '@synckit/sdk'
+export { MemoryStorage, IndexedDBStorage, createStorage } from '@synckit-js/sdk'
+export type { StorageAdapter, StoredDocument } from '@synckit-js/sdk'
 
 // ✅ Configuration and types
 export type {
@@ -793,7 +793,7 @@ export type {
   QueueConfig,
   NetworkStatus,
   DocumentSyncState
-} from '@synckit/sdk'
+} from '@synckit-js/sdk'
 
 // ✅ Error classes
 export {
@@ -802,7 +802,7 @@ export {
   WASMError,
   DocumentError,
   NetworkError
-} from '@synckit/sdk'
+} from '@synckit-js/sdk'
 
 // ✅ React hooks (requires React)
 export {
@@ -814,8 +814,8 @@ export {
   useNetworkStatus,
   useSyncState,
   useSyncDocumentWithState
-} from '@synckit/sdk/react'
-export type { SyncProviderProps } from '@synckit/sdk/react'
+} from '@synckit-js/sdk/react'
+export type { SyncProviderProps } from '@synckit-js/sdk/react'
 
 // ❌ NOT in v0.1.0: Text, Counter, CRDTSet, ConnectionStatus,
 // AuthProvider, StatusChangeCallback, ErrorCallback
@@ -828,7 +828,7 @@ export type { SyncProviderProps } from '@synckit/sdk/react'
 ### Complete Todo App (v0.1.0 - Local-First)
 
 ```typescript
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 interface Todo {
   id: string
@@ -877,7 +877,7 @@ async function deleteTodo(id: string) {
 
 ```typescript
 // ✅ WORKS in v0.1.0 - Network sync with documents
-import { SyncKit } from '@synckit/sdk'
+import { SyncKit } from '@synckit-js/sdk'
 
 interface Note {
   title: string
