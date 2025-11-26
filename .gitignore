@@ -4,12 +4,16 @@ target/
 *.pdb
 *.backup
 
-# Cargo.lock strategy:
+# Lock file strategy:
 # - Ignore for libraries (core/, sdk/) - users will use their own versions
-# - Track for binaries/servers (server/*/) - ensures reproducible builds
-# Note: core/Cargo.lock exists but is ignored (library crate)
+# - Track for applications (server/*/) - ensures reproducible builds
+
+# Rust: Cargo.lock
 Cargo.lock
 !server/*/Cargo.lock
+
+# Node/Bun: package-lock.json (npm) - ignore, we use bun.lock
+package-lock.json
 
 # WASM
 pkg/
