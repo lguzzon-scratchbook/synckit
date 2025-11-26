@@ -219,11 +219,11 @@ graph TD
     E -->|Persistence| E2[PostgreSQL/MongoDB]
     E -->|Security| E3[JWT auth + RBAC]
 
-    style A fill:#e1f5ff,stroke:#333,stroke-width:2px
-    style B fill:#fff4e1,stroke:#333,stroke-width:2px
-    style C fill:#ffe1e1,stroke:#333,stroke-width:2px
-    style D fill:#e1ffe1,stroke:#333,stroke-width:2px
-    style E fill:#f0e1ff,stroke:#333,stroke-width:2px
+    style A fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#1a1a1a
+    style B fill:#fff4e1,stroke:#333,stroke-width:2px,color:#1a1a1a
+    style C fill:#ffe1e1,stroke:#333,stroke-width:2px,color:#1a1a1a
+    style D fill:#e1ffe1,stroke:#333,stroke-width:2px,color:#1a1a1a
+    style E fill:#f0e1ff,stroke:#333,stroke-width:2px,color:#1a1a1a
 ```
 
 **[Detailed architecture docs →](docs/architecture/ARCHITECTURE.md)**
