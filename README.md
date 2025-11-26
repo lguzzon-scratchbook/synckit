@@ -49,7 +49,7 @@ True offline-first architecture—not just caching. Your app works perfectly on 
 
 ### 📦 **Enterprise Features, Startup Bundle**
 
-**~59 KB gzipped** (9KB SDK + 48KB WASM) - Complete WASM-based sync engine with TypeScript SDK.
+**~59 KB gzipped** (10KB SDK + 49KB WASM) - Complete WASM-based sync engine with TypeScript SDK.
 
 Current features (v0.1.0):
 - ✅ Offline-first sync (LWW)
@@ -62,7 +62,7 @@ Coming in v0.2.0:
 - 🚧 Text CRDTs (character-level editing)
 - 🚧 Counters, Sets (distributed data structures)
 
-**Size-critical apps?** Use Lite variant (~45 KB gzipped: 1KB SDK + 43KB WASM, local-only)
+**Size-critical apps?** Use Lite variant (~45 KB gzipped: 1.5KB SDK + 44KB WASM, local-only)
 
 **Competitive bundle size:** Larger than Yjs (~19KB pure JS), smaller than Automerge (~60-78KB).
 
@@ -72,13 +72,13 @@ Open source and self-hostable. No vendor lock-in, no surprise $2,000/month bills
 ### ⚡ **Fast by Design**
 - <1ms local operations (~5-20μs single field update)
 - <100ms sync latency (10-50ms p95)
-- ~59KB bundle (9KB SDK + 48KB WASM), ~45KB lite option
+- ~59KB bundle (10KB SDK + 49KB WASM), ~45KB lite option
 - Sub-200KB total with React
 
 ### 🛡️ **Data Integrity Guaranteed**
 - Zero data loss with automatic conflict resolution (Last-Write-Wins)
 - Formal verification with TLA+ (3 bugs found and fixed)
-- 2,000+ comprehensive tests (unit, integration, chaos, load)
+- 700+ comprehensive tests across TypeScript and Rust (unit, integration, chaos, load)
 
 ---
 
@@ -176,7 +176,7 @@ function TodoApp() {
 - **🗄️ Local Persistence** - IndexedDB storage, unlimited capacity
 - **🔀 Conflict Resolution** - Automatic Last-Write-Wins (LWW) merge
 - **⚡ Fast Operations** - <1ms local updates, <100ms sync latency
-- **📦 Compact Bundle** - ~59KB gzipped (9KB SDK + 48KB WASM)
+- **📦 Compact Bundle** - ~59KB gzipped (10KB SDK + 49KB WASM)
 - **🔐 Secure** - JWT authentication, RBAC permissions
 
 ### Framework Integration
@@ -205,31 +205,31 @@ function TodoApp() {
                    ▼
 ┌─────────────────────────────────────────────────┐
 │         SyncKit SDK (TypeScript)                │
-│   • Simple API (document, text, counter)       │
-│   • Framework adapters (React/Vue/Svelte)      │
-│   • Offline queue + Storage adapters           │
+│   • Simple API (document, text, counter)        │
+│   • Framework adapters (React/Vue/Svelte)       │
+│   • Offline queue + Storage adapters            │
 └──────────────────┬──────────────────────────────┘
                    │
                    ▼
 ┌─────────────────────────────────────────────────┐
-│       Rust Core Engine (WASM + Native)         │
-│   • LWW Sync (80% of use cases)               │
-│   • Text CRDTs (collaborative editing)         │
-│   • Custom CRDTs (counters, sets)              │
+│       Rust Core Engine (WASM + Native)          │
+│   • LWW Sync (80% of use cases)                 │
+│   • Text CRDTs (collaborative editing)          │
+│   • Custom CRDTs (counters, sets)               │
 └──────────────────┬──────────────────────────────┘
                    │
                    ▼
 ┌─────────────────────────────────────────────────┐
-│              IndexedDB Storage                   │
+│              IndexedDB Storage                  │ 
 │        (Your local source of truth)             │
 └─────────────────────────────────────────────────┘
                    │
                    ▼ (optional)
 ┌─────────────────────────────────────────────────┐
-│     SyncKit Server (TypeScript/Python/Go)      │
-│   • WebSocket real-time sync                   │
-│   • PostgreSQL / MongoDB storage               │
-│   • JWT auth + RBAC permissions                │
+│     SyncKit Server (TypeScript/Python/Go)       │
+│   • WebSocket real-time sync                    │
+│   • PostgreSQL / MongoDB storage                │
+│   • JWT auth + RBAC permissions                 │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -325,7 +325,7 @@ await counter.increment()
 - ✅ **Core Rust Engine** - LWW sync engine with CRDT foundation
 - ✅ **WASM Compilation** - 59KB gzipped (45KB lite), optimized performance
 - ✅ **TypeScript SDK** - Document API, IndexedDB storage, offline queue
-- ✅ **Cross-Tab Sync** - BroadcastChannel-based sync across browser tabs
+- ✅ **Cross-Tab Sync** - Server-mediated sync with operation buffering for multi-tab coordination
 - ✅ **React Integration** - `useSyncDocument`, `useSyncField`, `SyncProvider` hooks
 - ✅ **TypeScript Server** - WebSocket sync server with Bun + Hono
 - ✅ **Example Applications** - Todo app, collaborative editor, project management demos
@@ -336,6 +336,7 @@ await counter.increment()
 
 - 🚧 **Text CRDTs** - Collaborative text editing (`useText` hook) for character-level sync
 - 🚧 **Counter CRDTs** - Distributed counters (`useCounter` hook) for conflict-free increments
+- 🚧 **BroadcastChannel Cross-Tab** - Direct client-to-client sync without server (offline multi-tab)
 - 🚧 **Framework Adapters** - Vue composables (`@synckit/sdk/vue`), Svelte stores (`@synckit/sdk/svelte`)
 - 🚧 **Multi-Language Servers** - Python, Go, Rust server implementations (TypeScript complete)
 - 🚧 **Advanced Storage** - OPFS (Origin Private File System), SQLite adapter
