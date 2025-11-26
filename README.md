@@ -200,15 +200,30 @@ function TodoApp() {
 ```mermaid
 graph TD
     A[Your Application<br/>React/Vue/Svelte] --> B[SyncKit SDK<br/>TypeScript]
+
+    B -->|Simple API| B1[document, text, counter]
+    B -->|Framework adapters| B2[React/Vue/Svelte hooks]
+    B -->|Offline queue| B3[Storage adapters]
+
     B --> C[Rust Core Engine<br/>WASM + Native]
-    C --> D[IndexedDB Storage<br/>Local source of truth]
+
+    C -->|80% of use cases| C1[LWW Sync]
+    C -->|Collaborative editing| C2[Text CRDTs]
+    C -->|Advanced features| C3[Custom CRDTs<br/>counters, sets]
+
+    C --> D[IndexedDB Storage<br/>Your local source of truth]
+
     D -.->|Optional| E[SyncKit Server<br/>TypeScript/Python/Go/Rust]
 
-    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style B fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style C fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style D fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style E fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    E -->|Real-time sync| E1[WebSocket]
+    E -->|Persistence| E2[PostgreSQL/MongoDB]
+    E -->|Security| E3[JWT auth + RBAC]
+
+    style A fill:#e1f5ff,stroke:#333,stroke-width:2px
+    style B fill:#fff4e1,stroke:#333,stroke-width:2px
+    style C fill:#ffe1e1,stroke:#333,stroke-width:2px
+    style D fill:#e1ffe1,stroke:#333,stroke-width:2px
+    style E fill:#f0e1ff,stroke:#333,stroke-width:2px
 ```
 
 **[Detailed architecture docs →](docs/architecture/ARCHITECTURE.md)**
