@@ -63,8 +63,6 @@ function Editor() {
 }
 ```
 
-*(Live text editing demo coming soon)*
-
 ---
 
 ## ✨ Why SyncKit?
