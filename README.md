@@ -41,6 +41,8 @@ await doc.update({ completed: true })
 
 ### 🎬 See It In Action
 
+**⚡ [Try Live Demo](https://synckit-demo.netlify.app)** - Open in two tabs to see real-time sync!
+
 **1. Complex State (Kanban)**
 SyncKit handles structural data like lists and nested objects with automatic conflict resolution.
 
