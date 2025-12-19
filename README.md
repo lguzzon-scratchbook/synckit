@@ -459,7 +459,7 @@ Automerge:   180 MB  ███████████████████�
 
 SyncKit's core algorithms are based on published research:
 
-- **Fugue CRDT** - Matthew Weidner, Joseph Gentle & Martin Kleppmann, ["The Art of the Fugue: Minimizing Interleaving in Collaborative Text Editing"](https://arxiv.org/abs/2305.00583) (2023). Solves the interleaving problem in collaborative text editing.
+- **Fugue CRDT** - Matthew Weidner & Martin Kleppmann, ["The Art of the Fugue: Minimizing Interleaving in Collaborative Text Editing"](https://arxiv.org/abs/2305.00583) (2023). Solves the interleaving problem in collaborative text editing.
 - **Peritext** - Geoffrey Litt, Sarah Lim, Martin Kleppmann & Peter van Hardenberg, ["Peritext: A CRDT for Rich-Text Collaboration"](https://www.inkandswitch.com/peritext/) (2021). Provides conflict-free rich text formatting.
 
 ### Inspiration & Community
