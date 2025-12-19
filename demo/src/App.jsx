@@ -98,7 +98,7 @@ function Editor() {
           </strong>
           <ol style={{ margin: '0 0 15px 20px', paddingLeft: '0' }}>
             <li>Copy the URL below</li>
-            <li>Open it in a new tab (or send to a friend)</li>
+            <li>Open it in a new tab (Cross-tab Local Sync)</li>
             <li>Watch real-time sync magic happen! 🎩</li>
           </ol>
 
@@ -184,7 +184,7 @@ function Editor() {
             <strong>Offline-first:</strong> Works without internet, syncs when reconnected
           </li>
           <li style={{ marginBottom: '8px' }}>
-            <strong>No server required:</strong> Peer-to-peer or bring your own backend
+            <strong>No server required:</strong> Works 100% offline with local-first architecture
           </li>
         </ul>
       </div>
