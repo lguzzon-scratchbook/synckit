@@ -455,12 +455,23 @@ Automerge:   180 MB  ███████████████████�
 
 ## 🙏 Acknowledgments
 
+### Research & Algorithms
+
+SyncKit's core algorithms are based on published research:
+
+- **Fugue CRDT** - Matthew Weidner, Joseph Gentle & Martin Kleppmann, ["The Art of the Fugue: Minimizing Interleaving in Collaborative Text Editing"](https://arxiv.org/abs/2305.00583) (2023). Solves the interleaving problem in collaborative text editing.
+- **Peritext** - Geoffrey Litt, Sarah Lim, Martin Kleppmann & Peter van Hardenberg, ["Peritext: A CRDT for Rich-Text Collaboration"](https://www.inkandswitch.com/peritext/) (2021). Provides conflict-free rich text formatting.
+
+### Inspiration & Community
+
 Built with inspiration from:
+- **[Loro](https://loro.dev/)** - Production Fugue+Peritext implementation that influenced our Rust architecture
 - **[Yjs](https://github.com/yjs/yjs)** - Text CRDT concepts and performance optimization
 - **[Automerge](https://github.com/automerge/automerge)** - CRDT theory and formal verification
 - **[Linear](https://linear.app)** - Pragmatic approach to sync
 - **[Figma](https://figma.com)** - Custom sync architecture patterns
 - **[RxDB](https://rxdb.info/)** - Local-first database patterns
+- **[Ink & Switch](https://www.inkandswitch.com/)** - Research lab pioneering local-first software
 
 Special thanks to the local-first community for pioneering this movement.
 
