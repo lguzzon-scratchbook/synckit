@@ -233,7 +233,7 @@ class SyncKit {
 ### Basic Usage
 
 ```typescript
-interface Todo {
+interface Todo extends Record<string, unknown> {
   id: string
   text: string
   completed: boolean
