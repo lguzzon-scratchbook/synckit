@@ -461,7 +461,7 @@ await likesCounter.increment(5)
 await likesCounter.decrement()
 
 // Get current value
-const currentCount = likesCounter.get()
+const currentCount = likesCounter.value
 ```
 
 ### Counter API
@@ -478,8 +478,8 @@ class SyncCounter {
   // Decrement counter
   decrement(delta?: number): Promise<void>
 
-  // Get current value
-  get(): number
+  // Get current value (getter property)
+  get value(): number
 
   // Reset to zero (not recommended - loses history)
   reset(): Promise<void>
@@ -519,7 +519,7 @@ const hasTag = tags.has('urgent')
 const allTags = tags.get()  // Returns Set<string>
 
 // Get size
-const count = tags.size()
+const count = tags.size
 ```
 
 ### Set API
@@ -545,8 +545,8 @@ class SyncSet<T> {
   // Get all items
   get(): Set<T>
 
-  // Get size
-  size(): number
+  // Get size (getter property)
+  get size(): number
 
   // Clear set
   clear(): Promise<void>
